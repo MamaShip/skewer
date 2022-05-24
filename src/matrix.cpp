@@ -144,6 +144,13 @@ const double MAX_PENALTY = 4.477121255;
 const double EPSILON = (MIN_PENALTY / 10);
 ///////////////////////////////////////
 
+void mystrncpy(char *dest, const char *src, int n)
+{
+	while ((*dest++ = *src++) && --n)
+		;
+	*dest = '\0';
+}
+
 bool cElementSet::insert (const ELEMENT& val)
 {
 	pair<ELEMENT_SET::iterator,bool> ret;
@@ -175,7 +182,7 @@ void cAdapter::Init(char * seq, size_t sLen, TRIM_MODE trimMode)
 	int i;
 	// construct sequence
 	this->len = (int(sLen) > MAX_ADAPTER_LEN) ? MAX_ADAPTER_LEN : sLen;
-	// gzstrncpy(sequence, seq, len); // don't depend on fastq.h
+	mystrncpy(sequence, seq, len); // don't depend on fastq.h
 	this->trimMode = trimMode;
 
 	// construct mismatch bits
