@@ -32,8 +32,11 @@
 #include <float.h>
 #include <algorithm>
 #include <string.h>
+#include <limits.h>
+#include <math.h>
+#include <assert.h>
 #include "matrix.h"
-#include "fastq.h"
+// #include "fastq.h"
 
 CODE codeMap[256] = {
 	//  0        1        2        3        4        5        6        7        8        9        A        B        C        D        E        F
@@ -172,7 +175,7 @@ void cAdapter::Init(char * seq, size_t sLen, TRIM_MODE trimMode)
 	int i;
 	// construct sequence
 	this->len = (int(sLen) > MAX_ADAPTER_LEN) ? MAX_ADAPTER_LEN : sLen;
-	gzstrncpy(sequence, seq, len);
+	// gzstrncpy(sequence, seq, len); // don't depend on fastq.h
 	this->trimMode = trimMode;
 
 	// construct mismatch bits
